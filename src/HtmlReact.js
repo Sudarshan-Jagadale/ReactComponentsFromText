@@ -5,7 +5,8 @@ function Link(props) {
 }
 
 export default function HtmlReact() {
-  const htmlInput = "hello i have added <a> addded </a>";
+  const htmlInput =
+    "&lt;h1&gt;asdasd  &lt;/h1&gt; hello i have added <exlink> link </exlink>";
   const HtmlToReactParser = new Parser();
   //const reactElement = HtmlToReactParser.parse(htmlInput);
   //console.log(reactElement);
@@ -21,7 +22,7 @@ export default function HtmlReact() {
       // component as a child
       replaceChildren: true,
       shouldProcessNode: function (node) {
-        return node.name === "a";
+        return node.name === "exlink";
       },
       processNode: function (node, children, index) {
         return <Link>{children}</Link>;
@@ -30,6 +31,8 @@ export default function HtmlReact() {
     {
       // Anything else
       shouldProcessNode: function (node) {
+        //console.log(node)
+
         return true;
       },
       processNode: processNodeDefinitions.processDefaultNode
@@ -41,6 +44,8 @@ export default function HtmlReact() {
     isValidNode,
     processingInstructions
   );
+
+  console.log(reactComponent);
 
   return (
     <>
